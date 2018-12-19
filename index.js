@@ -1,4 +1,4 @@
-export default {
+module.exports= {
     checkPhone(str){
     let re = /^1[2|3|4|5|7|8][0-9]{9}$/;
     if(re.test(str)){
