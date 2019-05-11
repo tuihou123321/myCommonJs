@@ -1,3 +1,5 @@
+//字符串处理
+
 //删除空格
 export function removeBlank(str) {
     if (str) {
@@ -10,6 +12,21 @@ export function removeBlank(str) {
     }
     return str;
 }
+
+//去掉所有的html标记
+export function delHtmlTag(str) {
+    if (str) {
+        str = str.replace(/<[^>]+>/g, '');
+    }
+    str = str.replace(/&nbsp;/gi, '');
+    str = str.replace(/\s+/g, '');
+    str = removeBlank(str);
+    return str;
+}
+
+
+
+
 
 //判断是不是手机号
 export function checkPhone(str) {
@@ -39,18 +56,6 @@ export function checkPassword(value) {
 }
 
 
-//去掉所有的html标记
-export function delHtmlTag(str) {
-    if (str) {
-        str = str.replace(/<[^>]+>/g, '');
-    }
-    str = str.replace(/&nbsp;/gi, '');
-    str = str.replace(/\s+/g, '');
-    str = removeBlank(str);
-    return str;
-}
-
-
 //阻止浏览器的默认行为
 export function stopDefault(e) {
     //阻止默认浏览器动作(W3C)
@@ -61,10 +66,7 @@ export function stopDefault(e) {
     return false;
 }
 
-//判断用户是不是IOS手机
-export function isIOS() {
-    return /(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)
-}
+
 
 //从右到左依次算
 export function getLastParam(index = 0, url) {
@@ -78,20 +80,6 @@ export function getLastParam(index = 0, url) {
     return url.split('?')[0].split('/').reverse()[index];
 }
 
-//转换成时/分/秒
-export function changeTimeType(arr) {
-    let a = '';
-    if (arr[0] !== 0) {
-        a = arr[0] + '时';
-    }
-    if (arr[1] !== '00') {
-        a += arr[1] + '分';
-    }
-    if (arr[2] !== '00') {
-        a += arr[2] + '秒';
-    }
-    return a;
-}
 
 //限制标签数量
 export function tagsLimit(tags, maxNum) {
@@ -134,12 +122,14 @@ export function getCookie(key) {
     return null;
 }
 
+//删除cookies
 export function delCookie(key) {
     const exdate = new Date();
     exdate.setTime(exdate.getTime() - 1);
     const value = getCookie(key);
     if (value) document.cookie = `${key}=${encodeURIComponent(value)};path=/;expires=${exdate.toUTCString()}`;
 }
+
 
 
 //获取url参数
@@ -159,33 +149,6 @@ export function getParameterByName(name, url) {
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
 
-
-
-// 打...
-export function moreString(str, len) {
-    if (!str) return '';
-
-    if (str.length <= len) return str;
-
-    return str.substring(0, len) + '...';
-}
-
-
-//判断是否是客户端
-export function isApp() {
-    try {
-        let u = navigator.userAgent;
-        let isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
-        let isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
-        let ua = window.navigator.userAgent.toLowerCase();
-        if (isiOS || isAndroid) {
-            return true;
-        }
-        return false;
-    } catch (err) {
-        console.log(err);
-    }
-}
 
 export let isAliOrWx = function () {
     try {
@@ -239,10 +202,7 @@ export function isIosOrAndroid() {
 }
 
 
-/**
- * @return {boolean}
- */
-export function IsPC() {
+export function isPC() {
     let userAgentInfo = navigator.userAgent;
     let Agents = ['Android', 'iPhone', 'SymbianOS', 'Windows Phone', 'iPad', 'iPod'];
     let flag = true;
@@ -256,23 +216,14 @@ export function IsPC() {
 }
 
 
-//保留指定位数   repay=saveData(repay,2);
-export function saveData(value,length){
-    if(!value){return "0.00"}
-    value=value.toString();
-    if(value.indexOf(".")>0){
-        let arr=value.split(".");
-        let pointValue="";
-        if(arr[1].length<2){
-            pointValue=arr[1]+"0";
-        }
-        else{
-            pointValue=arr[1].substring(0,length)
-        }
-        value=arr[0]+"."+pointValue
-    }
-    else{
-        value=value+".00"
-    }
-    return value;
+//返回N天前的年/月/日
+export function getPreDay(n){
+    let now=new Date();
+    let date=new Date(now.getTime()-n*24*3600*1000);
+    let year=date.getFullYear();
+    let month=date.getMonth()+1>9?date.getMonth()+1:"0"+(date.getMonth()+1);
+    let day=date.getDate()>9?date.getDate():"0"+date.getDate();
+    let date2=year+"/"+month+"/"+day;
+    return date2;
 }
+

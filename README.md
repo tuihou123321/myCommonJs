@@ -1,8 +1,86 @@
-## xzCommonjs
+## mycommonjs
 
 ### 项目说明
 
-此项目包含项目中常用的js 代码方法，可通过npm下载
+此项目包含常用的js代码片段，无依赖，通过原生js实现，可通过npm,cnpm下载
 
-### 安装方式
-> npm i xzCommonjs
+
+#### 字符串处理
+```
+removeBlank(str) 
+//删除string空格
+//返回值类型：string
+
+
+delHtmlTag(str) 
+// 去掉string中所有的html标记
+//返回值类型：string
+
+
+getLastParam()  
+//获取url上最后一个路由参数
+//返回值类型：string
+
+
+getParameterByName(name,url) 
+//获取url上的参数
+//返回值类型：string
+
+
+tagsLimit(tags, maxNum)  
+//标签数量限制，并返回一个限制后的string，用“,”分割
+//返回值类型：string
+
+
+
+```
+
+#### 类型校验、设备检测
+```
+checkPhone(number)  
+//判断是不是手机号
+//返回值类型：bool
+
+checkPassword(string) 
+//密码校验，只能包含字母和数字
+//返回值类型：bool
+
+isIosOrAndroid()  
+//android,ios来判断当前设备
+//返回值类型:string
+
+isPC()  
+//判断是不是pc设备
+//返回值类型:bool
+
+isAliOrWx()   
+//判断当前app设备
+//返回值：ali=支付宝，wx=微信
+
+```
+
+
+
+#### cookies处理
+```
+getCookie(key) 
+//获取cookies
+//返回值类型：string
+
+delCookie(key) 
+//删除cookies
+//返回值类型：null
+
+```
+
+#### 其他
+```
+stopDefault() 
+//阻止浏览器默认行为
+//返回值类型：object
+
+getPreDay(n)
+//返回N天前的年/月/日
+//返回值类型：string
+
+```
