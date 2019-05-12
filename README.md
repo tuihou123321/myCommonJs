@@ -1,12 +1,16 @@
-## mycommonjs
+# mycommonjs
 
-### 项目说明
+## 项目说明
 
-此项目包含常用的js代码片段，无依赖，通过原生js实现，可通过npm,cnpm下载; 
-为了兼容SSR，去掉了所有的window对象；
+为了兼容SSR，此项目兼容拆分成两个部分，默认包兼容ssr,
+其他需要引用window对象的方法，引用另外一个包；
 
+
+### 一、不依赖window对象
+>  import mycommonjs from "mycommonjs"
 
 #### 字符串处理
+
 ```
 removeBlank(str) 
 //删除string空格
@@ -32,7 +36,6 @@ tagsLimit(tags, maxNum)
 //标签数量限制，并返回一个限制后的string，用“,”分割
 //返回值类型：string
 
-
 ```
 
 #### 类型校验、设备检测
@@ -45,6 +48,26 @@ checkPassword(string)
 //密码校验，只能包含字母和数字
 //返回值类型：bool
 
+```
+
+
+
+#### 其他
+```
+getPreDay(n)
+//返回N天前的年/月/日
+//返回值类型：string
+
+```
+
+### 二、需要引用window对象的的方法
+> import client from "mycommonjs/client"
+
+
+需要依赖window对象的方法，请引用下面的包：
+
+#### 类型校验、设备检测
+```
 isIosOrAndroid()  
 //android,ios来判断当前设备
 //返回值类型:string
@@ -57,21 +80,7 @@ isAliOrWx()
 //判断当前app设备
 //返回值：ali=支付宝，wx=微信
 
-```
 
-
-#### 其他
-```
-getPreDay(n)
-//返回N天前的年/月/日
-//返回值类型：string
-
-```
-
-
-单独引用： import {getCookies,delCookies} from "mycommonjs/cookies" 
-#### cookies处理
-```
 getCookie(key) 
 //获取cookies
 //返回值类型：string
