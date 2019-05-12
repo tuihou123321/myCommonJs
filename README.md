@@ -2,7 +2,8 @@
 
 ### 项目说明
 
-此项目包含常用的js代码片段，无依赖，通过原生js实现，可通过npm,cnpm下载
+此项目包含常用的js代码片段，无依赖，通过原生js实现，可通过npm,cnpm下载; 
+为了兼容SSR，去掉了所有的window对象；
 
 
 #### 字符串处理
@@ -32,7 +33,6 @@ tagsLimit(tags, maxNum)
 //返回值类型：string
 
 
-
 ```
 
 #### 类型校验、设备检测
@@ -60,7 +60,16 @@ isAliOrWx()
 ```
 
 
+#### 其他
+```
+getPreDay(n)
+//返回N天前的年/月/日
+//返回值类型：string
 
+```
+
+
+单独引用： import {getCookies,delCookies} from "mycommonjs/cookies" 
 #### cookies处理
 ```
 getCookie(key) 
@@ -70,17 +79,5 @@ getCookie(key)
 delCookie(key) 
 //删除cookies
 //返回值类型：null
-
-```
-
-#### 其他
-```
-stopDefault() 
-//阻止浏览器默认行为
-//返回值类型：object
-
-getPreDay(n)
-//返回N天前的年/月/日
-//返回值类型：string
 
 ```

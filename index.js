@@ -25,9 +25,6 @@ export function delHtmlTag(str) {
 }
 
 
-
-
-
 //判断是不是手机号
 export function checkPhone(str) {
     //去掉空格
@@ -56,27 +53,8 @@ export function checkPassword(value) {
 }
 
 
-//阻止浏览器的默认行为
-export function stopDefault(e) {
-    //阻止默认浏览器动作(W3C)
-    if (e && e.preventDefault) e.preventDefault();
-    else
-    //IE中阻止函数器默认动作的方式
-        window.event.returnValue = false;
-    return false;
-}
-
-
-
 //从右到左依次算
 export function getLastParam(index = 0, url) {
-    if (!url) {
-        try {
-            url = window.location.href;
-        } catch (e) {
-            console.log(url);
-        }
-    }
     return url.split('?')[0].split('/').reverse()[index];
 }
 
@@ -110,37 +88,8 @@ export function tagsLimit(tags, maxNum) {
     return tags;
 }
 
-
-export function getCookie(key) {
-    try {
-        const reg = new RegExp(`(^| )${key}=([^;]*)(;|$)`);
-        const arr = document.cookie.match(reg);
-        if (arr) return decodeURIComponent(arr[2]);
-    } catch (e) {
-        console.log(e);
-    }
-    return null;
-}
-
-//删除cookies
-export function delCookie(key) {
-    const exdate = new Date();
-    exdate.setTime(exdate.getTime() - 1);
-    const value = getCookie(key);
-    if (value) document.cookie = `${key}=${encodeURIComponent(value)};path=/;expires=${exdate.toUTCString()}`;
-}
-
-
-
 //获取url参数
 export function getParameterByName(name, url) {
-    if (!url) {
-        try {
-            url = window.location.href;
-        } catch (e) {
-            console.log(e);
-        }
-    }
     name = name.replace(/[\[\]]/g, '\\$&');
     let regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
         results = regex.exec(url);
@@ -161,23 +110,23 @@ export let isAliOrWx = function () {
                     trident: u.indexOf('Trident') > -1, //IE内核
                     presto: u.indexOf('Presto') > -1, //opera内核
                     webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
-                    gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+                    gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') === -1, //火狐内核
                     mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
                     ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
                     android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或uc浏览器
                     iPhone: u.indexOf('iPhone') > -1, //是否为iPhone或者QQHD浏览器
                     iPad: u.indexOf('iPad') > -1, //是否iPad
-                    webApp: u.indexOf('Safari') == -1 //是否web应该程序，没有头部与底部
+                    webApp: u.indexOf('Safari') === -1 //是否web应该程序，没有头部与底部
                 };
             }(),
             language: (navigator.browserLanguage || navigator.language).toLowerCase()
         };
         if(browser.versions.mobile) { //判断是否是移动设备打开。browser代码在下面
             let ua = navigator.userAgent.toLowerCase(); //获取判断用的对象
-            if(ua.match(/Alipay/i)=="alipay"){
+            if(ua.match(/Alipay/i)==="alipay"){
                 typeBower = 'ali';
             }
-            if(ua.match(/MicroMessenger/i) == "micromessenger") {
+            if(ua.match(/MicroMessenger/i) === "micromessenger") {
                 typeBower = 'wx';
             }
         }
@@ -223,7 +172,6 @@ export function getPreDay(n){
     let year=date.getFullYear();
     let month=date.getMonth()+1>9?date.getMonth()+1:"0"+(date.getMonth()+1);
     let day=date.getDate()>9?date.getDate():"0"+date.getDate();
-    let date2=year+"/"+month+"/"+day;
-    return date2;
+    return year+"/"+month+"/"+day;
 }
 
